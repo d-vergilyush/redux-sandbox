@@ -10,9 +10,9 @@ const bindActionCreator = (creator, dispatch) => (...args) => {
   return dispatch(creator(...args));
 };
 
-const incDispatch = () => bindActionCreator(inc, dispatch);
-const decDispatch = () => bindActionCreator(dec, dispatch);
-const rndDispatch = () => bindActionCreator(rnd, dispatch);
+const incDispatch = bindActionCreator(inc, dispatch);
+const decDispatch = bindActionCreator(dec, dispatch);
+const rndDispatch = bindActionCreator(rnd, dispatch);
 
 document
   .querySelector('.inc')
