@@ -6,22 +6,23 @@ import { inc, dec, rnd } from './actions';
 const store = createStore(reducer, 0);
 const { dispatch } = store;
 
+const bindActionCreator = (creator, dispatch) => (...args) => {
+  return dispatch(creator(...args));
+};
+
+const incDispatch = () => bindActionCreator(inc, dispatch);
+const decDispatch = () => bindActionCreator(dec, dispatch);
+const rndDispatch = () => bindActionCreator(rnd, dispatch);
+
 document
   .querySelector('.inc')
-  .addEventListener('click', () => {
-    dispatch(inc());
-  });
+  .addEventListener('click', () => incDispatch());
 document
   .querySelector('.dec')
-  .addEventListener('click', () => {
-    dispatch(dec());
-  });
+  .addEventListener('click', () => decDispatch());
 document
   .querySelector('.rnd')
-  .addEventListener('click', () => {
-    const payload = Math.floor(Math.random()*10)
-    dispatch(rnd(payload));
-  });
+  .addEventListener('click', () => rndDispatch(Math.floor(Math.random()*10)));
   
 const update = () => {
   document
