@@ -18,24 +18,27 @@ const reducer = (state = 0, action) => {
 
 const store = createStore(reducer, 0);
 
+const inc = () => ({ type: 'INC' });
+
+const dec = () => ({ type: 'DEC' });
+
+const rnd = (payload) => ({ type: 'RND', payload });
+
 document
   .querySelector('.inc')
   .addEventListener('click', () => {
-    store.dispatch({type: 'INC'});
+    store.dispatch(inc());
   });
 document
   .querySelector('.dec')
   .addEventListener('click', () => {
-    store.dispatch({type: 'DEC'});
+    store.dispatch(dec());
   });
 document
   .querySelector('.rnd')
   .addEventListener('click', () => {
     const payload = Math.floor(Math.random()*10)
-    store.dispatch({
-      type: 'RND',
-      payload
-    });
+    store.dispatch(rnd(payload));
   });
   
 const update = () => {
